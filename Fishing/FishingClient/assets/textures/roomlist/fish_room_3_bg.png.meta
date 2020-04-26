@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "cf4a2032-6df2-4a5f-bbf3-d7985c68f7c3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 258,
+  "height": 447,
+  "platformSettings": {},
+  "subMetas": {
+    "fish_room_3_bg": {
+      "ver": "1.0.4",
+      "uuid": "a5708904-9748-4691-b2bb-56ea41ced9cf",
+      "rawTextureUuid": "cf4a2032-6df2-4a5f-bbf3-d7985c68f7c3",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 258,
+      "height": 447,
+      "rawWidth": 258,
+      "rawHeight": 447,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

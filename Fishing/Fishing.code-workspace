@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "FishingClient"
+		},
+		{
+			"path": "FishingServer"
+		}
+	],
+	"settings": {
+		"cSpell.words": [
+			"Fluxay",
+			"resgister"
+		]
+	}
+}

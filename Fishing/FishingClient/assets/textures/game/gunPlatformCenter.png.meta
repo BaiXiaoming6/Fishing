@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "e6d084c6-173d-473c-a58d-377e63e56f54",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 167,
+  "height": 75,
+  "platformSettings": {},
+  "subMetas": {
+    "gunPlatformCenter": {
+      "ver": "1.0.4",
+      "uuid": "21ff64db-cbb2-49a8-81eb-c353d3c77d85",
+      "rawTextureUuid": "e6d084c6-173d-473c-a58d-377e63e56f54",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 167,
+      "height": 75,
+      "rawWidth": 167,
+      "rawHeight": 75,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

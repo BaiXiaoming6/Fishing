@@ -1,0 +1,9 @@
+{
+  "engine": "cocos2d-html5",
+  "packages": "packages",
+  "version": "2.3.3",
+  "name": "Fishing",
+  "uuid": "fa4f664a-c75d-42bd-9a78-5d290b93983d",
+  "id": "4a2ee986-1aa1-4f57-bdf8-a4b9e0391789",
+  "isNew": false
+}

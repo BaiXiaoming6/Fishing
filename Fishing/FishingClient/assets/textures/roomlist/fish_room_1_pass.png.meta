@@ -1,0 +1,36 @@
+{
+  "ver": "2.3.4",
+  "uuid": "b7299141-2d15-4ddd-932d-6d2a6f088c70",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "width": 258,
+  "height": 433,
+  "platformSettings": {},
+  "subMetas": {
+    "fish_room_1_pass": {
+      "ver": "1.0.4",
+      "uuid": "4960ebbd-34fe-4bf9-8ef7-1fb78954c578",
+      "rawTextureUuid": "b7299141-2d15-4ddd-932d-6d2a6f088c70",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 258,
+      "height": 433,
+      "rawWidth": 258,
+      "rawHeight": 433,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
