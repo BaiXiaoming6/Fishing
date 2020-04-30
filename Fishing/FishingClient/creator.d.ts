@@ -15358,9 +15358,7 @@ declare namespace cc {
 	}	
 	/** !#en Material Asset.
 	!#zh 材质资源类。 */
-	export class Material extends Asset {
-        [x: string]: any;
-        effect: any;		
+	export class Material extends Asset {		
 		/**
 		!#en Creates a Material with builtin Effect.
 		!#zh 使用内建 Effect 创建一个材质。

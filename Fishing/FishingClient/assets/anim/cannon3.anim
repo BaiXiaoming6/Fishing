@@ -1,0 +1,49 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "cannon3",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.25,
+  "sample": 20,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "comps": {
+      "cc.Sprite": {
+        "spriteFrame": [
+          {
+            "frame": 0,
+            "value": {
+              "__uuid__": "d8e247df-a963-4961-9abb-24980014bcd5"
+            }
+          },
+          {
+            "frame": 0.05,
+            "value": {
+              "__uuid__": "497483b7-ffbc-415e-a07f-8da999951180"
+            }
+          },
+          {
+            "frame": 0.1,
+            "value": {
+              "__uuid__": "1ffe1a20-ae79-4ea7-b812-89eea1a8c02d"
+            }
+          },
+          {
+            "frame": 0.15,
+            "value": {
+              "__uuid__": "69c42d3a-7de7-4d3a-9257-1aace13378c1"
+            }
+          },
+          {
+            "frame": 0.2,
+            "value": {
+              "__uuid__": "12f5bc0e-ea5b-4116-96ad-b7e74e416a45"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "events": []
+}
