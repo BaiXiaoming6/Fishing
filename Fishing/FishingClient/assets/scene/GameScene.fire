@@ -79,18 +79,21 @@
       },
       {
         "__id__": 42
+      },
+      {
+        "__id__": 45
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 45
-      },
-      {
         "__id__": 46
       },
       {
         "__id__": 47
+      },
+      {
+        "__id__": 48
       }
     ],
     "_prefab": null,
@@ -180,7 +183,7 @@
       "array": [
         0,
         0,
-        219.96128712572406,
+        220.83647796503186,
         0,
         0,
         0,
@@ -316,7 +319,9 @@
     },
     "_enabled": true,
     "_materials": [
-      null
+      {
+        "__uuid__": "eca5d2f2-8ef6-41c2-bbe6-f9c79d09c432"
+      }
     ],
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
@@ -2138,6 +2143,64 @@
     "_id": "39Jaeo/9RL3LZ90+I4mAgX"
   },
   {
+    "__type__": "cc.Node",
+    "_name": "MainNode",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [],
+    "_prefab": null,
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 0,
+      "height": 0
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_trs": {
+      "__type__": "TypedArray",
+      "ctor": "Float64Array",
+      "array": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 0,
+    "groupIndex": 0,
+    "_id": "0cneOhVllH3LE310e7UJc3"
+  },
+  {
     "__type__": "cc.Canvas",
     "_name": "",
     "_objFlags": 0,
@@ -2189,6 +2252,9 @@
       "__id__": 2
     },
     "_enabled": true,
+    "mainNode": {
+      "__id__": 45
+    },
     "seatList": [
       {
         "__id__": 10
@@ -2208,6 +2274,9 @@
     },
     "bulletPrefab": {
       "__uuid__": "803ff3bc-4061-4e29-b67a-5ca363ee4569"
+    },
+    "bulletAtlas": {
+      "__uuid__": "b39dc6a3-2bb2-4f42-9bdd-9b2d51b157f8"
     },
     "_id": "b0o68WKr5BzJ5W5y+RjEbs"
   }

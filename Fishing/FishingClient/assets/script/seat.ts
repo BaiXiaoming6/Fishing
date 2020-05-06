@@ -1,8 +1,8 @@
 import Utils from "./Utils";
 import Weapon from "./weapon";
 import gameNetMgr from "./gameNetMgr";
-import Bullet from "./bullet";
-import BulletList from "./BulletList"; 
+import Bullet from "./GameNode/Bullet/Bullet";
+import BulletList from "./GameNode/Bullet/BulletList"; 
 
 const { ccclass, property } = cc._decorator;
 
@@ -119,11 +119,11 @@ export default class Seat extends cc.Component {
         let weaponSit = this.weaponNode.parent.convertToWorldSpaceAR(this.weaponNode.getPosition());
         let radian = cc.misc.degreesToRadians(degress)
 
-        let bpos = cc.v2(weaponSit.x + 50 * Math.sin(radian), weaponSit.y + 50 * Math.cos(radian))
+        let bpos = cc.v3(weaponSit.x + 50 * Math.sin(radian), weaponSit.y + 50 * Math.cos(radian))
         if (bottom == false) {
 
             radian = -radian;
-            bpos = cc.v2(weaponSit.x + 50 * Math.sin(radian), weaponSit.y - 50 * Math.cos(radian))
+            bpos = cc.v3(weaponSit.x + 50 * Math.sin(radian), weaponSit.y - 50 * Math.cos(radian))
         }
         BulletList.Instance.addBullet(level, bottom, radian, bpos, degress,bulletId,this.userid)
         // bullet.getComponent(Bullet).shot(game, level, bottom, radian, bpos, degress,bulletId,this.userid)

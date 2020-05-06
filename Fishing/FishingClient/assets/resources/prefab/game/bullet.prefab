@@ -18,7 +18,6 @@
     "_parent": null,
     "_children": [],
     "_active": true,
-    "_level": 1,
     "_components": [
       {
         "__id__": 2
@@ -51,17 +50,6 @@
       "x": 0.5,
       "y": 0.5
     },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
-    "_is3DNode": false,
-    "groupIndex": 2,
-    "_id": "",
     "_trs": {
       "__type__": "TypedArray",
       "ctor": "Float64Array",
@@ -72,12 +60,24 @@
         0,
         0,
         0,
-        0,
+        1,
         1,
         1,
         1
       ]
-    }
+    },
+    "_eulerAngles": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_is3DNode": false,
+    "_groupIndex": 2,
+    "groupIndex": 2,
+    "_id": ""
   },
   {
     "__type__": "cc.Sprite",
@@ -114,18 +114,6 @@
     "_id": ""
   },
   {
-    "__type__": "7bde4Yq+TdIZIchLtY/NCbC",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "speed": 800,
-    "power": 4,
-    "_id": ""
-  },
-  {
     "__type__": "cc.BoxCollider",
     "_name": "",
     "_objFlags": 0,
@@ -144,6 +132,26 @@
       "width": 24,
       "height": 52
     },
+    "_id": ""
+  },
+  {
+    "__type__": "f543b3przdCPrZFfG1GspDV",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "speed": 800,
+    "power": 4,
+    "bulletSp": [
+      "Bullet1_Normal_1_b",
+      "Bullet1_Normal_2_b",
+      "Bullet2_Normal_3_b",
+      "Bullet2_Normal_4_b",
+      "Bullet3_Normal_5_b",
+      "Bullet3_Normal_6_b"
+    ],
     "_id": ""
   },
   {
