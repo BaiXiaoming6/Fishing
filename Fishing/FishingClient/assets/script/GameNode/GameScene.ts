@@ -1,6 +1,10 @@
 import Utils from "./../Utils";
-import BulletList from "./Bullet/BulletList"
+import BulletList from "./Bullet/BulletList";
 import Bullet from "./Bullet/Bullet";
+import Fish from "./Fish/Fish";
+import FishList from "./Fish/FishList";
+import {FishType} from "./Fish/FishType";
+import Net from "./Net/Net";
 const {ccclass, property} = cc._decorator;
 
 @ccclass
@@ -14,12 +18,43 @@ export default class GameScene extends cc.Component {
     paoTaiPrefab: cc.Prefab = null;
     @property(cc.Prefab)
     bulletPrefab: cc.Prefab = null;
+    @property(cc.Prefab)
+    fishPrefab: cc.Prefab = null;
+    @property(cc.Prefab)
+    netPrefab: cc.Prefab = null;
     @property(cc.SpriteAtlas)
     bulletAtlas: cc.SpriteAtlas = null;
+    @property(cc.SpriteAtlas)
+    fishAtlas: cc.SpriteAtlas = null;
+    
+
+
+    fishTypes: FishType[];
+    fishRoot: cc.Node;
+    netPool: cc.NodePool;
 
     onLoad () {
+        var manager = cc.director.getCollisionManager();
+        manager.enabled = true;
+        manager.enabledDebugDraw = true;
+        manager.enabledDrawBoundingBox = true;
+
+        this.netPool = new cc.NodePool();
+
+        FishList.Instance.init(this);
         BulletList.Instance.init(this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.node_TOUCH_START, this)
+    
+        this.fishRoot = cc.find('Canvas/MainNode')
+        let self = this;
+        cc.loader.loadRes("fishConfig", function (err, jsonAsset) {
+            if (err) {
+                console.log(err.message)
+                return
+            }
+            self.fishTypes = <FishType[]>jsonAsset.json;
+            self.schedule(self.creatFish, 2)
+        })
     }
 
     start () {
@@ -38,13 +73,38 @@ export default class GameScene extends cc.Component {
         let radian = Math.atan((touchPos.x - weaponPos.x) / (touchPos.y - weaponPos.y));
         let degress = cc.misc.radiansToDegrees(radian);
         gun.getChildByName('weapon').angle = -degress;
-        console.log(degress,"-----------角度")
-        let level = 1;
-        let weaponSit = touchPos;
-        let bpos = cc.v3(weaponSit.x + 50 * Math.sin(radian), weaponSit.y + 50 * Math.cos(radian), 9999)
-        // BulletList.Instance.addBullet(level)
         let bullet = cc.instantiate(this.bulletPrefab);
         bullet.getComponent(Bullet).shot(this, 1);
+        bullet.parent = this.mainNode;
+    }
+
+    //生成鱼
+    creatFish(){
+        let fishCount = 3;
+        for (let i = 0; i < fishCount; i++) {
+            let fish = cc.instantiate(this.fishPrefab)
+            let x = - Math.random() * 100 - this.node.width / 2
+            let y = (Math.random() * -0.5) * 300
+            fish.position = cc.v3(x, y)
+            fish.parent = this.node
+            let type = this.fishTypes[Math.floor(Math.random() * this.fishTypes.length)]
+            fish.getComponent(Fish).init(this, type)
+        }
+    }
+
+    //击中鱼后生成渔网
+    createNet(pos: cc.Vec3){
+        let net: cc.Node;
+        if(this.netPool.size() > 0){
+            net = this.netPool.get();
+        }
+        else{
+            net = cc.instantiate(this.netPrefab);
+        }
+        net.getComponent(Net).init(pos, this);
+    }
+    depositNet(net: cc.Node){
+        this.netPool.put(net);
     }
 
     userFire(data: object){

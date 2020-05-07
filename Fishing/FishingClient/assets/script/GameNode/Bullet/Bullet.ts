@@ -30,35 +30,18 @@ export default class Bullet extends cc.Component {
     shot(game: GameScene, level: number){
         this.game = game;
         this.bulletLevel = level;
+        let sit = game.seatList[0]
+        let gun = game.seatList[0].getChildByName("paotai")
         this.node.getComponent(cc.Sprite).spriteFrame = this.game.bulletAtlas.getSpriteFrame(this.bulletSp[this.bulletLevel - 1]);
-        let weaponSit = game.seatList[0].convertToNodeSpaceAR(game.seatList[0].getPosition());
-        let angle = game.seatList[0].angle;
+        let weaponSit = this.node.convertToNodeSpaceAR(sit.getPosition());
+        let angle = gun.getChildByName('weapon').angle;
         this.radian = cc.misc.degreesToRadians(angle);
         this.node.angle = angle;
-        let pos = cc.v3(weaponSit.x + 50 * Math.sin(this.radian), weaponSit.y +50 * Math.cos(this.radian), 999);
+        let pos = cc.v3(weaponSit.x + 50 * Math.sin(-this.radian), weaponSit.y + 50 * Math.cos(this.radian), 999);
         this.node.position = pos;
-        this.node.setParent(game.mainNode);
 
-        // this.time = 2;
-        // this.radian = radian;
-        // this.node.angle = degress;
-        
-        // this.bulletLevel = level;
-        // this.userId = userId;
-        // this.bulletId = bulletId;
-        // this.node.getComponent(cc.Sprite).spriteFrame = this.game.bulletAtlas.getSpriteFrame(this.bulletSp[this.bulletLevel - 1]);
-        // this.changeCollider();
-        // if (bottom) {
-        //     this.bounce = 1;
-        // } else {
-        //     this.bounce = -1;
-        //     this.node.angle = -(180 - this.node.angle);
-        // }
-        // this.node.position = bpos;
-        // console.log(radian,"------------radian")
-        // console.log(bpos,"------------bpos")
-        // console.log(degress,"------------degress")
-        // this.node.parent = cc.director.getScene();
+        this.time = 2
+        this.bounce =1
     }
 
     restInfo(){
@@ -83,29 +66,38 @@ export default class Bullet extends cc.Component {
 
     }
 
-    // update (dt) {
-    //     let bx = this.node.x;
-    //     let by = this.node.y;
-    //     if (this.time > 0) {
-    //         if (bx > cc.winSize.width || bx < 0) {
-    //             this.radian = -this.radian;
-    //             this.node.angle = -this.node.angle;
-    //             this.time--;
-    //         } else if(by > cc.winSize.height) {
-    //             this.node.angle = 180 - this.node.angle;
-    //             this.bounce = -1
-    //             this.time--;
-    //         } else if(by < 30){
-    //             this.node.angle = -this.node.angle;
-    //             this.bounce = 1;
-    //             this.time--;
-    //         }
-    //     }
-    //     bx += dt * this.speed * Math.sin(this.radian);
-    //     by += dt * this.speed * Math.cos(this.radian) * this.bounce;
-    //     this.node.position = cc.v3(bx, by);
-    //     if (bx > cc.winSize.width + 100 || bx < -100 || by > cc.winSize.height + 100 || by < 0) {
-    //         BulletList.Instance.despatchBullet(this.bulletId);
-    //     }
-    // }
+    update (dt) {
+        let bx = this.node.x;
+        let by = this.node.y;
+        if (this.time > 0) {
+            if (bx > cc.winSize.width / 2 || bx < -cc.winSize.width / 2) {
+                this.radian = -this.radian;
+                this.node.angle = -this.node.angle;
+                this.time--;
+            } else if(by > cc.winSize.height / 2) {
+                this.node.angle = 180 - this.node.angle;
+                this.bounce = -1
+                this.time--;
+            } else if(by < -300){
+                this.node.angle = 180 -this.node.angle;
+                this.bounce = 1;
+                this.time--;
+            }
+        }
+        bx += dt * this.speed * Math.sin(-this.radian);
+        by += dt * this.speed * Math.cos(this.radian) * this.bounce;
+        this.node.position = cc.v3(bx, by);
+        if (bx > cc.winSize.width + 100 || bx < -100 || by > cc.winSize.height + 100 || by < 0) {
+            BulletList.Instance.despatchBullet(this.bulletId);
+        }
+    }
+
+    onCollisionEnter(other:cc.Collider, self){
+        console.log(self,"self")
+        let pos = self.world.points;
+        console.log(pos,"撞击子弹位置")
+        let posNet = pos[0].add(pos[3]).mul(0.5);
+        this.game.createNet(posNet);
+        this.node.destroy();
+    }
 }

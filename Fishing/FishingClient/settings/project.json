@@ -1,16 +1,29 @@
 {
   "collision-matrix": [
     [
+      false,
       true
+    ],
+    [
+      true,
+      false,
+      true
+    ],
+    [
+      false,
+      true,
+      false
     ]
   ],
   "excluded-modules": [],
   "group-list": [
-    "default"
+    "default",
+    "fish",
+    "bullet"
   ],
   "design-resolution-width": 960,
   "design-resolution-height": 640,
-  "fit-width": false,
+  "fit-width": true,
   "fit-height": true,
   "use-project-simulator-setting": false,
   "simulator-orientation": false,
@@ -31,6 +44,5 @@
       "enable": false
     }
   },
-  "migrate-history": [],
-  "start-scene": "current"
+  "migrate-history": []
 }

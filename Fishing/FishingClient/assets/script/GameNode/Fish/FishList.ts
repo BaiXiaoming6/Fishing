@@ -1,7 +1,5 @@
-import GameSc from "./gameSc";
-import Fish from "./fish";
-
- 
+import GameSc from "../GameScene";
+import Fish from "./Fish";
 
 export default class FishList{
     public static readonly Instance: FishList = new FishList();
@@ -30,7 +28,7 @@ export default class FishList{
         if (this.fishPool.size()>0) {
             fish = this.fishPool.get()
         } else {
-            fish = cc.instantiate(this.game.fishPre)
+            fish = cc.instantiate(this.game.fishPrefab)
         }
         fish.position = cc.v2(data.trace[0][0], data.trace[0][1])
         fish.parent = this.game.fishRoot
@@ -47,8 +45,8 @@ export default class FishList{
         }
         if  (data.y != undefined && data.x != undefined) {
             if (Math.abs(data.x - fish.x) < 30) {
-                 let action = cc.moveTo(0.1,cc.v2(data.x,data.y));
-                 fish.runAction(action);
+                let action = cc.moveTo(0.1,cc.v2(data.x,data.y));
+                fish.runAction(action);
             } else {
                 if (undefined !== data.x) {
                     fish.x = data.x
@@ -71,7 +69,7 @@ export default class FishList{
             fish.getComponent(Fish).despawnFish(data.chairId)
             
         }
-        this.game._seat[data.chairId].changeScore(data.score)
+        // this.game._seat[data.chairId].changeScore(data.score)
     }
     despawnFish(fishId){
         let fish:cc.Node = this.fishList[fishId]

@@ -125,7 +125,7 @@ export default class Seat extends cc.Component {
             radian = -radian;
             bpos = cc.v3(weaponSit.x + 50 * Math.sin(radian), weaponSit.y - 50 * Math.cos(radian))
         }
-        BulletList.Instance.addBullet(level, bottom, radian, bpos, degress,bulletId,this.userid)
+        // BulletList.Instance.addBullet(level, bottom, radian, bpos, degress,bulletId,this.userid)
         // bullet.getComponent(Bullet).shot(game, level, bottom, radian, bpos, degress,bulletId,this.userid)
     }
     // update (dt) {}
