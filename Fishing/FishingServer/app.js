@@ -24,4 +24,8 @@ let websocket = ws.createServer(function(client) {
         console.log("on error", result);
     });
 });
-websocket.listen(3001);
+websocket.listen(3005);
+
+
+
+roomController.createRoom();

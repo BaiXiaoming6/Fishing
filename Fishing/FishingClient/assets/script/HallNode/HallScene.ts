@@ -6,13 +6,11 @@ export default class HallScene extends cc.Component {
 
     @property(cc.Node)
     roomListLayer: cc.Node = null;
-  
-    // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {}
 
     start () {
-
+        global.messageController.onJoinRoom = this.onJoinRoom.bind(this);
     }
 
     onClickGame(){
@@ -25,6 +23,13 @@ export default class HallScene extends cc.Component {
 
     onClickRoom(event:string, customData:number){
         let roomType = customData;
+        let data = {
+            type: roomType
+        }
+        global.messageController.sendMessage('join-room', data);
+    }
+
+    onJoinRoom(){
         global.sceneController.enterGameLayer();
     }
 }

@@ -5,26 +5,13 @@ class DB {
             host: 'rm-bp13i31ygni4ekdef125010.mysql.rds.aliyuncs.com',
             user: 'xiaoming',
             password: 'Bai147258',
-            database: 'niuniu'
+            database: 'fishing'
         });
         mysql.connect();
         console.log("链接数据库");
         this._mysql = mysql;
     }
 
-    // getUserInfo(id) {
-    //     return new Promise((resole, reject) => {
-    //         this._mysql.query('select * from user_info where id = ' + id, (err, result) => {
-    //             if (err) {
-    //                 reject(err);
-    //                 console.log("err", err);
-    //             } else {
-    //                 console.log("get user info = ", JSON.stringify(result));
-    //                 resole(result);
-    //             }
-    //         });
-    //     });
-    // }
     getUserInfo(account, password) {
         return new Promise((resole, reject) => {
             this._mysql.query('select * from user_info where account = ?', [account], (err, result) => {

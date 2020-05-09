@@ -14,7 +14,7 @@ class MessageController {
     connectServer(){
         console.log("请求链接服务器");
         return new Promise((resole, reject) =>{
-            let ws = new WebSocket("ws://47.114.181.224:3001");
+            let ws = new WebSocket("ws://47.114.181.224:3005");
             ws.onopen = function(result) {
                 console.log("on open ", result);
                 resole();
@@ -36,7 +36,7 @@ class MessageController {
     }
 
     //向服务器发送消息
-    sendMessage(type:string, data, cb?){
+    sendMessage(type:string, data: any, cb?){
         console.log("type ", type);
         let message = {
             type: type,
@@ -52,20 +52,33 @@ class MessageController {
     }
 
     //处理服务器返回的消息
-    processMessage(type:string, data:any, callBackId:number){
-        console.log("type2 ", type);
+    processMessage(type:string, data:object, callBackId:number){
+        console.log("服务器返回的数据 ", data);
         switch (type) {
             case 'login':
-                console.log("登录回调2 ", data);
-                this.onLogin()
+                this.onLogin(data);
+                break;
+            case 'join-room':
+                this.onJoinRoom();
+                break;
+            case 'sync-all-player-info':
+                this.onSyncAllPlayerInfo(data);
                 break;
             default:
                 break;
         }
     }
 
-    onLogin(){
+    onLogin(data: object){
         console.log("在LoginScene中重写此函数");
+    }
+
+    onJoinRoom(){
+        console.log("在HallScene中重写此函数");
+    }
+
+    onSyncAllPlayerInfo(data: object){
+        console.log("在GameScene中重写此函数");
     }
 }
 

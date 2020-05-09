@@ -9,11 +9,16 @@ class PlayerController {
         return new Promise((resole, reject) => {
             for (let i = 0; i < this._playerList.length; i++) {
                 let player = this._playerList[i];
-                if (player.getId() === id) {
+                // if (player.getId() === id) {
+                //座位号不等于0说明在房间中
+                // console.log(player, "----------player")
+                if (player._seat !== 0 & player._nickName == account) {
                     player.reConnect(client);
                     resole(player.getPlayerInfo());
+                    console.log(player.getPlayerInfo(), "----------断线重连玩家信息")
                     return;
                 }
+                // }
             }
             this._db.getUserInfo(account, password).then((result) => {
                 console.log(result, "鸡毛")

@@ -30,18 +30,32 @@ export default class Bullet extends cc.Component {
     shot(game: GameScene, level: number){
         this.game = game;
         this.bulletLevel = level;
-        let sit = game.seatList[0]
-        let gun = game.seatList[0].getChildByName("paotai")
+        this.bounce = 1;
+        let sit = game.seatList[game.mySeat];
+        let gun = game.seatList[game.mySeat].getChildByName("paotai");
+        
         this.node.getComponent(cc.Sprite).spriteFrame = this.game.bulletAtlas.getSpriteFrame(this.bulletSp[this.bulletLevel - 1]);
         let weaponSit = this.node.convertToNodeSpaceAR(sit.getPosition());
         let angle = gun.getChildByName('weapon').angle;
         this.radian = cc.misc.degreesToRadians(angle);
+        
+
+        let offsetX = 50
+        let offsetY = 50;
+        if ((game.mySeat + 1) % 2 == 0) {
+            offsetX = 0;
+            offsetY = -65;
+            this.bounce = -1;
+            this.radian = -this.radian;
+            angle = 180 + angle;
+        }
+
         this.node.angle = angle;
-        let pos = cc.v3(weaponSit.x + 50 * Math.sin(-this.radian), weaponSit.y + 50 * Math.cos(this.radian), 999);
+        let pos = cc.v3(weaponSit.x + offsetX * Math.sin(-this.radian), weaponSit.y + offsetY * Math.cos(this.radian), 999);
         this.node.position = pos;
 
         this.time = 2
-        this.bounce =1
+        
     }
 
     restInfo(){
@@ -79,7 +93,7 @@ export default class Bullet extends cc.Component {
                 this.bounce = -1
                 this.time--;
             } else if(by < -300){
-                this.node.angle = 180 -this.node.angle;
+                this.node.angle = 180 - this.node.angle;
                 this.bounce = 1;
                 this.time--;
             }

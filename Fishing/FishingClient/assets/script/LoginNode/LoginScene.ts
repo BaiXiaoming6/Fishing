@@ -51,7 +51,7 @@ export default class LoginScene extends cc.Component {
         }
     }
 
-    onLogin(data){
+    onLogin(data: object){
         global.playerData.setUserData(data);
         global.sceneController.enterHallLayer();
     }

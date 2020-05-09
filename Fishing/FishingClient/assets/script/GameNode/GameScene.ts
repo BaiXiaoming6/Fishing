@@ -1,3 +1,4 @@
+import global from "../global";
 import Utils from "./../Utils";
 import BulletList from "./Bullet/BulletList";
 import Bullet from "./Bullet/Bullet";
@@ -32,8 +33,10 @@ export default class GameScene extends cc.Component {
     fishTypes: FishType[];
     fishRoot: cc.Node;
     netPool: cc.NodePool;
+    mySeat: number = 0;
 
     onLoad () {
+        global.messageController.onSyncAllPlayerInfo = this.syncAllPlayerInfo.bind(this);
         var manager = cc.director.getCollisionManager();
         manager.enabled = true;
         manager.enabledDebugDraw = true;
@@ -58,16 +61,17 @@ export default class GameScene extends cc.Component {
     }
 
     start () {
-        this.addPlayer()
+        //请求房间信息并初始化
+        global.messageController.sendMessage('request-room-info', "");
     }
 
-    update (dt) {}
+    update (_dt) {}
 
 
     //屏幕点击事件
     node_TOUCH_START(event: cc.Event.EventTouch){
         console.log("发射炮弹")
-        let gun = this.seatList[0].getChildByName("paotai")
+        let gun = this.seatList[ this.mySeat].getChildByName("paotai")
         let weaponPos = gun.position;
         let touchPos = gun.parent.convertToNodeSpaceAR(event.getLocation());
         let radian = Math.atan((touchPos.x - weaponPos.x) / (touchPos.y - weaponPos.y));
@@ -107,14 +111,33 @@ export default class GameScene extends cc.Component {
         this.netPool.put(net);
     }
 
-    userFire(data: object){
+    userFire(_data: object){
     }
 
 
+    //获取房间内玩家信息
+    syncAllPlayerInfo(data: any){
+        //给玩家排座位
+        for (let i = 0; i < data.length; i++) {
+            this.addPlayer(data[i]);
+        }
+    }
+
     //有玩家进入房间
-    addPlayer(){
-        let paoTai = cc.instantiate(this.paoTaiPrefab)
-        paoTai.parent = this.seatList[0]
-        console.log(paoTai.x)
+    addPlayer(data: any){
+        console.log(data,"有玩家加入房间")
+        let seat = data.seat - 1;
+        let paoTai = cc.instantiate(this.paoTaiPrefab);
+        paoTai.parent = this.seatList[seat];
+        console.log(seat,"seat");
+        if ((seat + 1) % 2 == 0) {
+            paoTai.angle = 180;
+            paoTai.y += 15;
+        }
+        if (data.id === global.playerData.gerUserData().id) {
+            paoTai.getChildByName("cannonplus").active = true;
+            paoTai.getChildByName("cannomminus").active = true;
+            this.mySeat = seat;
+        }
     }
 }

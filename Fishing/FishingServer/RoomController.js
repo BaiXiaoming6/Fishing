@@ -4,74 +4,30 @@ class RoomController {
     constructor() {
         this._roomList = [];
     }
-    createRoom(data, player) {
-        console.log("room controller create room", JSON.stringify(data));
-        // return new Promise(()=>{
+    createRoom() {
+        console.log("服务器自动创建房间");
+        //四种类型的房间  默认先每种创建一个
+        for (let i = 0; i < 4; i++) {
+            let type = i;
+            let room = new Room(type, this);
+            this._roomList.push(room);
+        }
+    }
 
-        //     new room = new Room(id,data);
-        // })
-        return new Promise((resolse, reject) => {
-            let houseCardCost = Config.RoomConfig.HouseCardCount[data.roundCountType];
-            console.log("house card cost", houseCardCost);
-            let houseCardCount = player.getHouseCardCount();
-            if (houseCardCost > houseCardCount) {
-                reject('房卡不够，创建房间失败');
-            } else {
-                this.getNewRoomId().then((id) => {
-                    console.log("new room id = ", id);
-                    let room = new Room(id, data, this);
-                    this._roomList.push(room);
-                    resolse(id);
-                })
-            }
-        })
-    }
-    getNewRoomId() {
-        const getStr = (cb) => {
-            let str = '';
-            //112233 ,123456
-            for (let i = 0; i < 6; i++) {
-                str += Math.round(Math.random() * 9);
-            }
-            for (let i = 0; i < this._roomList.length; i++) {
-                let room = this._roomList[i];
-                if (room.getId() === str) {
-                    //已经存在此id
-                    getStr(cb);
-                    return;
-                }
-            }
-            if (cb) {
-                cb(str);
-            }
-        }
-        return new Promise((resolse) => {
-            getStr(resolse);
-        });
-    }
-    requestJoinRoom(roomId, player) {
-        let target = undefined;
-        for (let i = 0; i < this._roomList.length; i++) {
-            let room = this._roomList[i];
-            if (room.getId() === roomId) {
-                //存在这个房间
-                target = room;
-                break;
-            }
-        }
-        return new Promise((resolse, reject) => {
-            if (target) {
+    requestJoinRoom(type, player) {
+        let room = this._roomList[type];
+        return new Promise((resoles, reject) => {
+            if (room) {
                 //找到了房间
-                let isCanJoin = target.isCanJoin(player);
+                let isCanJoin = room.isCanJoin();
                 if (isCanJoin === true) {
-                    target.addPlayer(player);
-                    resolse('加入房间成功');
+                    room.addPlayer(player);
+                    resoles("加入房间成功");
                 } else {
                     reject(isCanJoin);
                 }
-
             } else {
-                reject('未找到此房间' + roomId);
+                reject('未找到此房间' + type);
             }
         })
 
